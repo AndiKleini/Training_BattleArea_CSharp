@@ -11,7 +11,7 @@ namespace BattleArena
             UserIO userinteraction = new UserIO();
 
             Random randomNumberGenerator = new Random();
-            Hero[] playerList = { new Hero("Player 1", new CynradBow(randomNumberGenerator)),
+            Hero[] playerList = { new Hero("Player 1", /* new CynradBow(randomNumberGenerator) */ new LongBowAdapter(new Items.OldVersion.LongBow(randomNumberGenerator))),
                 new Hero("Player 2", new CynradBow(randomNumberGenerator)) };
 
             bool run = true;
