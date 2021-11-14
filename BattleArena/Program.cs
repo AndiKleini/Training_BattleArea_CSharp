@@ -1,5 +1,6 @@
 ﻿using BattleArena.Items;
 using BattleArena.Pawn;
+using BattleArena.ScreamObsever;
 using System;
 
 namespace BattleArena
@@ -11,8 +12,11 @@ namespace BattleArena
             UserIO userinteraction = new UserIO();
 
             Random randomNumberGenerator = new Random();
-            Hero[] playerList = { new Hero("Player 1", /* new CynradBow(randomNumberGenerator) */ new LongBowAdapter(new Items.OldVersion.LongBow(randomNumberGenerator))),
-                new Hero("Player 2", new CynradBow(randomNumberGenerator)) };
+            Hero hero1 = new Hero("Player 1", new LongBowAdapter(new Items.OldVersion.LongBow(randomNumberGenerator)));
+            hero1.SubscribeTo(new PainfulScreamObserver());
+            Hero hero2 = new Hero("Player 2", new CynradBow(randomNumberGenerator));
+            hero2.SubscribeTo(new PainfulScreamObserver());
+            Hero[] playerList = { hero1, hero2 };
 
             bool run = true;
 
@@ -81,11 +85,11 @@ namespace BattleArena
 
                     if (currentHero.Name == "Player 1")
                     {
-                        currentHero.useGoblins(playerList[1]);
+                        currentHero.UseGoblins(playerList[1]);
                     }
                     else
                     {
-                        currentHero.useGoblins(playerList[0]);
+                        currentHero.UseGoblins(playerList[0]);
                     }
                 }
 

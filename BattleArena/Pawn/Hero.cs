@@ -1,12 +1,12 @@
 ﻿using BattleArena.Items;
+using BattleArena.ScreamObsever;
 using System;
 using System.Collections.Generic;
 
 namespace BattleArena.Pawn
 {
-    public class Hero
+    public class Hero : DamageCausedSubjectBase
     {
-       
         private readonly IEquipment weapon;
         private int lastKeyInput;
         private List<Goblin> goblins = new List<Goblin>();
@@ -37,7 +37,7 @@ namespace BattleArena.Pawn
             this.Coins += this.Leprechaun + 1;
         }
 
-        public void useGoblins(Hero other)
+        public void UseGoblins(Hero other)
         {
             foreach (Goblin tmpGoblin in this.goblins)
             {
@@ -47,6 +47,7 @@ namespace BattleArena.Pawn
 
         public void ReduceHealth(int hitPoints)
         {
+            this.NotifyHit(hitPoints);
             this.Health -= hitPoints;
         }
 
